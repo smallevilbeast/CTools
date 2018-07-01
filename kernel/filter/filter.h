@@ -21,21 +21,13 @@
 #include "config.h"
 #endif
 
-#include "php.h"
-#include "php_ini.h"
-#include "ext/standard/info.h"
-#include "php_ctools.h"
+#ifndef CTOOLS_FILTER_H
+#define CTOOLS_FILTER_H
 
-#ifndef CTOOLS_CLASS_ENTRIES_H
-#define CTOOLS_CLASS_ENTRIES_H
+extern zend_class_entry *filter_ce;
 
+#endif /*CTOOLS_FILTER_H*/
 
-zend_class_entry *cthread_ce;
-zend_class_entry *cprocess_ce;
-zend_class_entry *array_ce;
-zend_class_entry *filter_ce;
-
-#endif /*CTOOLS_CLASS_ENTRIES_H*/
 
 
 /*

@@ -46,7 +46,6 @@ $thread->asyncRun( function( ){
     sleep(5);
 } );
 
-echo '<br>' . PHP_EOL;
 echo "I'm the main thread";
 sleep(5);
 ```
@@ -73,7 +72,6 @@ $thread->asyncRun( function(){
     } 
 } );
 
-echo '<br>' . PHP_EOL;
 echo "I'm the main thread";
 sleep(5);
 $thread->killMainThread();
@@ -144,6 +142,7 @@ print_r($carray->combineKeyValue( $arr ));
 ```
 
 **输出如下：**
+
 ```php
 Array
 (
@@ -186,4 +185,64 @@ Array
     [5] => hello
 )
 
+```
+
+**2、计算数组某一列的和**
+
+```php
+$arr = [
+	[
+		'id' => 1,
+		'age' => 25
+	],
+	[
+		'id' => 2,
+		'age' => 23
+	],
+	[
+		'id' => 4,
+		'age' => 28
+	]
+];
+
+echo CTool\CArray::columnSum($arr, 'id');
+
+```
+
+**输出如下**
+
+```php
+7
+```
+
+### 参数过滤 ###
+
+**1、过滤参数**
+
+```php
+echo CTool\CFilter::filter("hello", function($value){
+    return 'world' . strtoupper($value) . PHP_EOL;
+});
+```
+
+**输出如下：**
+
+```php
+worldHELLO
+```
+
+```php
+function changeW($value)
+{
+    $value[2] = 'T';
+    return $value;
+}
+
+echo CTool\CFilter::filter("world", 'strtoupper|strtolower|changeW'));
+```
+
+**输出如下：**
+
+```php
+woTld
 ```

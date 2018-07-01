@@ -128,7 +128,6 @@ CTOOL_INIT(cthread)
 
     cthread_ce = zend_register_internal_class(&ce);
     cthread_ce->ce_flags |= ZEND_ACC_FINAL;
-
-    CTOOL_PR_BOOL(cthread_ce, "KILLMAIN", 0, ZEND_ACC_PRIVATE);
+    
     CTOOL_PR_NULL(cthread_ce, "HANDLERS", ZEND_ACC_PRIVATE);
 }
