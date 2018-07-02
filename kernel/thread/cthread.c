@@ -61,6 +61,8 @@ ZEND_END_ARG_INFO()
 ZEND_BEGIN_ARG_INFO_EX(ARGINFO(cthread_kill_main_thread), 0, 0, 0)
 ZEND_END_ARG_INFO()
 
+ZEND_BEGIN_ARG_INFO_EX(ARGINFO(cthread_destruct), 0, 0, 0)
+ZEND_END_ARG_INFO()
 /**
  * The following where the function definitions
  */
@@ -109,8 +111,18 @@ CTOOL_METHOD(CThread, asyncRun)
  */
 CTOOL_METHOD(CThread, killMainThread)
 {
+    zend_update_property_bool( CTOOL_ENTRY_OBJ(getThis()), CTOOL_STRL("KILLMAIN"), IS_TRUE );
     pthread_exit(NULL);
 }/*}}}*/
+
+CTOOL_METHOD(CThread, __destruct)
+{
+    zval *kill_main = zend_read_property(CTOOL_ENTRY_OBJ(getThis()), CTOOL_STRL("KILLMAIN"), 1, NULL);
+    if ( kill_main && Z_TYPE_INFO_P(kill_main) ==   IS_FALSE )
+    {
+        pthread_exit(NULL);
+    }
+}
 
 /* function definitions end */
 
@@ -118,8 +130,8 @@ CTOOL_FUNCTIONS(cthread)
     CTOOL_ME(CThread, __construct,    ARGINFO(cthread_constructor),      ZEND_ACC_PUBLIC)
     CTOOL_ME(CThread, asyncRun,       ARGINFO(cthread_async_run),        ZEND_ACC_PUBLIC)
     CTOOL_ME(CThread, killMainThread, ARGINFO(cthread_kill_main_thread), ZEND_ACC_PUBLIC)
+    CTOOL_ME(CThread, __destruct,     ARGINFO(cthread_destruct),         ZEND_ACC_PUBLIC)
 CTOOL_FUNCTIONS_END();
-
 
 CTOOL_INIT(cthread)
 {
@@ -130,4 +142,5 @@ CTOOL_INIT(cthread)
     cthread_ce->ce_flags |= ZEND_ACC_FINAL;
     
     CTOOL_PR_NULL(cthread_ce, "HANDLERS", ZEND_ACC_PRIVATE);
+    CTOOL_PR_BOOL(cthread_ce, "KILLMAIN", 0, ZEND_ACC_PRIVATE);
 }
