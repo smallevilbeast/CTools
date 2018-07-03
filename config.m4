@@ -52,9 +52,11 @@ if test "$PHP_CTOOLS" != "no"; then
   PHP_ADD_LIBRARY(pthread, 1, CTOOLS_SHARED_LIBADD)
   PHP_NEW_EXTENSION(
     ctools,
-    ctools.c                    \
-    kernel/class_entries.c      \
-    kernel/array/array.c        \
-    kernel/process/cprocess.c   \
+    ctools.c                            \
+    kernel/class_entries.c              \
+    kernel/array/array.c                \
+    kernel/filter/filter.c              \
+    kernel/process/cprocess.c           \
+    kernel/process/ipc/sharememory.c    \
     kernel/thread/cthread.c, $ext_shared,, -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1)
 fi

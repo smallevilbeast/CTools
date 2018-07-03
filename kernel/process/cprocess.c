@@ -83,12 +83,21 @@ CTOOL_METHOD(CProcess, kill)
     ZVAL_LONG(return_value, ret);
 }/*}}}*/
 
+/**
+ * {{{
+ * All methods for the CTool\CProcess class
+ */
 CTOOL_FUNCTIONS(cprocess)
     CTOOL_ME(CProcess, __construct, arginfo_cprocess_construct, ZEND_ACC_PUBLIC)
     CTOOL_ME(CProcess, fork, arginfo_cprocess_fork, ZEND_ACC_PUBLIC)
     CTOOL_ME(CProcess, kill, arginfo_cprocess_kill, ZEND_ACC_PUBLIC)
 CTOOL_FUNCTIONS_END()
+/*}}}*/
 
+/**
+ * {{{ 
+ * Load the class CTool\CProcess into the Zend Engine
+ */
 CTOOL_INIT(cprocess)
 {
     zend_class_entry ce;
@@ -96,4 +105,14 @@ CTOOL_INIT(cprocess)
 
     cprocess_ce = zend_register_internal_class(&ce);
     cprocess_ce->ce_flags |= ZEND_ACC_FINAL;
-}
+}/*}}}*/
+
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
+ */

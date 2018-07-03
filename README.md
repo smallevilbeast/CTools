@@ -146,6 +146,27 @@ $process = new CTool\CProcess();
 $process->kill($pid);
 ```
 
+### IPC(进程间通信) ###
+
+**使用的IPC手段是共享内存基于Posix,共享内存仅支持 [字符串] 类型**
+
+**示例：**
+
+```php
+/* 第一个参数标识的共享内存的ID，不同进程间使用ID即可通信
+ * 第二个参数标识共享内存的大小
+ */
+$shareMemory = new CTool\CIpc\ShareMemory(1, 5*1024);
+
+/* 往共享内存写入数据 */
+$shareMemory->writeData("hello");
+
+/* 读取共享内存的数据 */
+$shareMemory->readData();
+
+echo PHP_EOL;
+```
+
 ### 数组 ###
 
 **1、数组的键与值的合并**
