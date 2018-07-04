@@ -37,6 +37,15 @@ ZEND_BEGIN_ARG_INFO_EX(ARGINFO(filter_filter), 0, 0, 2)
 ZEND_END_ARG_INFO()
 
 /**
+ * {{{ proto Filter::__construct()
+ * The construct function for the filter class
+ */
+CTOOL_METHOD(Filter, __construct)
+{
+
+}/*}}}*/
+
+/**
  * {{{ proto CFilter::filter($value, $closure)
  * To filter the value with the callback or global funtion which can be find in runtime or compile time
  * for example:
@@ -95,7 +104,8 @@ CTOOL_METHOD(Filter, filter)
 }/*}}}*/
 
 CTOOL_FUNCTIONS(filter)
-    CTOOL_ME(Filter, filter, ARGINFO(filter_filter), ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
+    CTOOL_ME(Filter, __construct, arginfo_filter_construct, ZEND_ACC_PUBLIC)
+    CTOOL_ME(Filter, filter, arginfo_filter_filter, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 CTOOL_FUNCTIONS_END()
 
 /**

@@ -21,23 +21,15 @@
 #include "config.h"
 #endif
 
-#include "php.h"
-#include "php_ini.h"
-#include "ext/standard/info.h"
-#include "php_ctools.h"
+#ifndef CTOOLS_TIMER_H
+#define CTOOLS_TIMER_H
 
-#ifndef CTOOLS_CLASS_ENTRIES_H
-#define CTOOLS_CLASS_ENTRIES_H
+#define TIMER_NAME "timer"
 
+extern zend_class_entry *timer_ce;
 
-zend_class_entry *cthread_ce;
-zend_class_entry *cprocess_ce;
-zend_class_entry *array_ce;
-zend_class_entry *filter_ce;
-zend_class_entry *sharememory_ce;
-zend_class_entry *timer_ce;
+#endif /*CTOOLS_TIMER_H*/
 
-#endif /*CTOOLS_CLASS_ENTRIES_H*/
 
 
 /*

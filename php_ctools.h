@@ -41,12 +41,10 @@ extern zend_module_entry ctools_module_entry;
 /*
   	Declare any global variables you may need between the BEGIN
 	and END macros here:
-
-ZEND_BEGIN_MODULE_GLOBALS(ctools)
-	zend_long  global_value;
-	char *global_string;
-ZEND_END_MODULE_GLOBALS(ctools)
 */
+ZEND_BEGIN_MODULE_GLOBALS(ctools)
+    zend_long  value;
+ZEND_END_MODULE_GLOBALS(ctools)
 
 /* Always refer to the globals in your function as CTOOLS_G(variable).
    You are encouraged to rename these macros something shorter, see
@@ -57,7 +55,6 @@ ZEND_END_MODULE_GLOBALS(ctools)
 #if defined(ZTS) && defined(COMPILE_DL_CTOOLS)
 ZEND_TSRMLS_CACHE_EXTERN()
 #endif
-
 
 #define CTOOL_ME                    PHP_ME
 #define CTOOL_AB_ME                 PHP_ABSTRACT_ME
@@ -85,6 +82,8 @@ ZEND_TSRMLS_CACHE_EXTERN()
 #define CTOOL_PR_STRING(entry, name, string_value, type)   zend_declare_property_string(entry, CTOOL_STRL(name), string_value, type)
 #define CTOOL_STRL(str)                  (str),(sizeof(str)-1)
 #define CTOOL_STRS(str)                  (str),(sizeof(str))
+
+extern ZEND_DECLARE_MODULE_GLOBALS(ctools);
 
 #endif	/* PHP_CTOOLS_H */
 

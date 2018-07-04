@@ -9,6 +9,14 @@ dnl [  --enable-ctools           Enable ctools support])
 if test "$PHP_CTOOLS" != "no"; then
   dnl Write more examples of tests here...
 
+  dnl CTools need NTS environment
+  AC_MSG_CHECKING([for NTS])
+  if test "$PHP_THREAD_SAFETY" != "no"; then
+		AC_MSG_RESULT([CTools need your environment to be NTS, ZTS will not work.])
+	else
+		AC_MSG_RESULT([OK])
+	fi
+
   dnl # --with-ctools -> check with-path
   dnl SEARCH_PATH="/usr/local /usr"     # you might want to change this
   dnl SEARCH_FOR="/include/ctools.h"  # you most likely want to change this
@@ -57,6 +65,7 @@ if test "$PHP_CTOOLS" != "no"; then
     kernel/array/array.c                \
     kernel/filter/filter.c              \
     kernel/process/cprocess.c           \
+    kernel/timer/timer.c                \
     kernel/process/ipc/sharememory.c    \
     kernel/thread/cthread.c, $ext_shared,, -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1)
 fi

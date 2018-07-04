@@ -68,7 +68,6 @@ ZEND_END_ARG_INFO()
  */
 CTOOL_METHOD(CThread, __construct)
 {
-
     zval *handlers = zend_read_property(CTOOL_ENTRY_OBJ(getThis()), CTOOL_STRL("HANDLERS"), 1, NULL);
     if ( !handlers || ZVAL_IS_NULL(handlers) )
     {

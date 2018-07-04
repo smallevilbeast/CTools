@@ -31,10 +31,12 @@
 CTOOL_INIT(cthread);
 CTOOL_INIT(cprocess);
 CTOOL_INIT(carray);
+CTOOL_INIT(filter);
+CTOOL_INIT(sharememory);
+CTOOL_INIT(timer);
 
-/* If you declare any globals in php_ctools.h uncomment this:
+/* If you declare any globals in php_ctools.h uncomment this:*/
 ZEND_DECLARE_MODULE_GLOBALS(ctools)
-*/
 
 /* True global resources - no need for thread safety here */
 static int le_ctools;
@@ -68,7 +70,6 @@ PHP_FUNCTION(get_ctools_version)
    follow this convention for the convenience of others editing your code.
 */
 
-
 /* {{{ php_ctools_init_globals
  */
 /* Uncomment this function if you have INI entries
@@ -84,13 +85,15 @@ static void php_ctools_init_globals(zend_ctools_globals *ctools_globals)
  */
 PHP_MINIT_FUNCTION(ctools)
 {
-	/* If you have INI entries, uncomment these lines
-	REGISTER_INI_ENTRIES();
-	*/
-
+#if defined(COMPILE_DL_CTOOLS) && defined(ZTS)
+    ZEND_INIT_MODULE_GLOBALS(ctools, NULL, NULL);
+#endif
 	cthread_init();
 	cprocess_init();
 	carray_init();
+	filter_init();
+	sharememory_init();
+	timer_init();
 
 	return SUCCESS;
 }
@@ -100,10 +103,6 @@ PHP_MINIT_FUNCTION(ctools)
  */
 PHP_MSHUTDOWN_FUNCTION(ctools)
 {
-	/* uncomment this line if you have INI entries
-	UNREGISTER_INI_ENTRIES();
-	*/
-	
 	return SUCCESS;
 }
 /* }}} */
@@ -136,10 +135,6 @@ PHP_MINFO_FUNCTION(ctools)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "ctools support", "enabled");
 	php_info_print_table_end();
-
-	/* Remove comments if you have entries in php.ini
-	DISPLAY_INI_ENTRIES();
-	*/
 }
 /* }}} */
 
