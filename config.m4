@@ -12,7 +12,7 @@ if test "$PHP_CTOOLS" != "no"; then
   dnl CTools need NTS environment
   AC_MSG_CHECKING([for NTS])
   if test "$PHP_THREAD_SAFETY" != "no"; then
-		AC_MSG_RESULT([CTools need your environment to be NTS, ZTS will not work.])
+		AC_MSG_ERROR([CTools need your environment to be NTS, ZTS will not work.])
 	else
 		AC_MSG_RESULT([OK])
 	fi
